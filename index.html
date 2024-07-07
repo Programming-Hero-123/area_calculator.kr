@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .shape {
+            margin-bottom: 20px;
+        }
+        .shape input {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .shape button {
+            padding: 10px;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .shape button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        .shape-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .shape-buttons button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Area Calculator</h1>
+        <div class="shape-buttons">
+            <button onclick="showShapeForm('rectangle')">Rectangle</button>
+            <button onclick="showShapeForm('triangle')">Triangle</button>
+            <button onclick="showShapeForm('circle')">Circle</button>
+        </div>
+
+        <div class="shape hidden" id="rectangle">
+            <h2>Rectangle</h2>
+            <input type="number" id="rectWidth" placeholder="Width">
+            <input type="number" id="rectHeight" placeholder="Height">
+            <button onclick="calculateRectangleArea()">Calculate Area</button>
+            <div class="result" id="rectResult"></div>
+        </div>
+        
+        <div class="shape hidden" id="triangle">
+            <h2>Triangle</h2>
+            <input type="number" id="triBase" placeholder="Base">
+            <input type="number" id="triHeight" placeholder="Height">
+            <button onclick="calculateTriangleArea()">Calculate Area</button>
+            <div class="result" id="triResult"></div>
+        </div>
+
+        <div class="shape hidden" id="circle">
+            <h2>Circle</h2>
+            <input type="number" id="circleRadius" placeholder="Radius">
+            <button onclick="calculateCircleArea()">Calculate Area</button>
+            <div class="result" id="circleResult"></div>
+        </div>
+    </div>
+
+    <script>
+        function showShapeForm(shape) {
+            document.querySelectorAll('.shape').forEach(form => form.classList.add('hidden'));
+            document.getElementById(shape).classList.remove('hidden');
+        }
+
+        function calculateRectangleArea() {
+            const width = document.getElementById('rectWidth').value;
+            const height = document.getElementById('rectHeight').value;
+            if(width && height) {
+                const area = width * height;
+                document.getElementById('rectResult').innerText = `Area: ${area} square units`;
+            } else {
+                document.getElementById('rectResult').innerText = 'Please enter both width and height.';
+            }
+        }
+
+        function calculateTriangleArea() {
+            const base = document.getElementById('triBase').value;
+            const height = document.getElementById('triHeight').value;
+            if(base && height) {
+                const area = 0.5 * base * height;
+                document.getElementById('triResult').innerText = `Area: ${area} square units`;
+            } else {
+                document.getElementById('triResult').innerText = 'Please enter both base and height.';
+            }
+        }
+
+        function calculateCircleArea() {
+            const radius = document.getElementById('circleRadius').value;
+            if(radius) {
+                const area = Math.PI * radius * radius;
+                document.getElementById('circleResult').innerText = `Area: ${area.toFixed(2)} square units`;
+            } else {
+                document.getElementById('circleResult').innerText = 'Please enter the radius.';
+            }
+        }
+    </script>
+</body>
+</html>
